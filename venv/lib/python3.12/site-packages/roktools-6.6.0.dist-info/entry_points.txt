@@ -1,0 +1,7 @@
+[console_scripts]
+cl=roktools.cl:entry_point
+compute_cdf=roktools.stats:cdf_cli
+merge_rinex_nav=roktools.rinex:merge_nav_cli
+rinex_from_file=roktools.rinex:rinex_from_file
+tensorial=roktools.tensorial:entry_point
+

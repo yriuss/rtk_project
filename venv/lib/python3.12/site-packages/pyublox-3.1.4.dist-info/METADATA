@@ -1,0 +1,107 @@
+Metadata-Version: 2.1
+Name: pyublox
+Version: 3.1.4
+Summary: Interface with ublox chipsets using Python.
+Home-page: https://gitlab.esa.int/AMIC/pyublox.git
+Author: Rokubun
+Author-email: info@rokubun.cat
+License: EUROPEAN SPACE AGENCY PUBLIC LICENSE - V2.4 - STRONG COPYLEFT
+Platform: UNKNOWN
+Description-Content-Type: text/markdown
+Requires-Dist: docopt
+Requires-Dist: pyserial
+Requires-Dist: roktools (>=1.4)
+
+# Python package to communicate with ublox receivers
+
+Python package to communicate with ublox chipsets
+
+To install the package:
+
+```bash
+pip3 install pyublox
+```
+
+## Basic usage
+
+This section includes some basic sections on how to use the package
+
+```bash
+# Help
+pyublox -h
+
+# Autodetect ublox receiver connected via a serial port, including some
+# basic receiver configuration (rates, tracked signals, ...)
+pyublox detect
+```
+
+## Testing the package
+
+This package uses the pytest suite, to execute the tests, issue the following
+command
+
+```bash
+pytest -v -r s /path/to/source
+```
+
+The `-r s` option is used to show the reason of skipped tests or modules
+
+### Development within a Docker container
+
+The best way to develop the package is by using a controlled environement.
+To do this, run a Python 3.7 container like so
+
+```bash
+docker run -v `pwd`:/pyublox -ti rokubun/gcc:debian-python3.7 bash
+```
+
+If deveoping within the Raspberry Pi
+
+```bash
+docker run -v `pwd`:/pyublox --device=/dev/ttyACM0  -ti python:3.7  bash
+
+# Develop using jupyter (mounting a folder to store the Notebooks)
+cd amic/pyublox/
+docker run -v `pwd`:/pyublox -v "${PWD}/notebooks":/notebooks -p 8888:8888 --device=/dev/ttyACM0  -ti andresvidal/jupyter-armv7l
+```
+
+Once within the container type the following commands:
+
+```bash
+# The package requires git to work properly
+pip install -e /pyublox
+```
+
+More information on the image available in [jupyter-armv7l repository](https://github.com/andresvidal/jupyter-armv7l)
+
+
+We can also use docker compose
+
+```bash
+# Build the image
+cd amic/pyublox/
+docker-compose build
+
+# Or directly run the container for development, this is equivalent to the
+# docker run call shown above, but we do not need to launch pip install
+docker-compose up
+```
+
+## Submission to PyPi
+
+In order to deploy to PyPi
+
+```bash
+# Update setuptools
+python3 -m pip install --user --upgrade setuptools wheel
+
+# Create the distribution wheel
+python3 setup.py sdist bdist_wheel
+
+# Upload the distribution wheels to the PyPi repo
+python3 -m twine upload dist/*
+```
+
+More details on deployment can be found [here](https://packaging.python.org/tutorials/packaging-projects/#generating-distribution-archives).
+
+

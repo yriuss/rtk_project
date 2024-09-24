@@ -1,0 +1,3 @@
+[console_scripts]
+pyublox = pyublox.main:main
+
