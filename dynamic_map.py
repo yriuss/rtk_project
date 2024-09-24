@@ -49,7 +49,7 @@ for i, row in df.iterrows():
     ax.relim()
     ax.autoscale_view()
     plt.draw()
-    plt.pause(1)  # Pausar 1 segundo antes de mostrar a próxima coordenada
+    plt.pause(0.1)  # Pausar 1 segundo antes de mostrar a próxima coordenada
     
     # Imprimir as coordenadas relativas
     print(f"Timestamp: {timestamp}, Coordenada UTM Relativa: (X: {x_relativo}, Y: {y_relativo})")
