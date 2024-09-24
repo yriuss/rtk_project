@@ -4,7 +4,7 @@ import time
 import matplotlib.pyplot as plt
 
 # Carregar o arquivo CSV
-df = pd.read_csv('gnss_positions_test13.csv')
+df = pd.read_csv('gps_data_test2.csv')
 
 # Função para converter latitude e longitude para UTM
 def latlon_to_utm(lat, lon):
